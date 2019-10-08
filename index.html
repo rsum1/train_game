@@ -23,7 +23,7 @@
     <div class="col s12" style="background-color: darkcyan; color: white; padding: 10px">Current Train Schedule</div>
     <div class="col s12">
       <table class="striped">
-        <thead>
+        <thead style="font-weight: bold">
           <tr>
             <th>Train Name</th>
             <th>Destination</th>
@@ -32,42 +32,14 @@
             <th>Minutes Away</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Destination</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Frequesncy (min)</td>
-            <td>Jellybean</td>
-            <td>Jellybean</td>
-            <td>Jellybean</td>
-            <td>Jellybean</td>
-          </tr>
-          <tr>
-            <td>Next Arrival</td>
-            <td>Next Arrival</td>
-            <td>Next Arrival</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-          <tr>
-            <td>Next Arrival</td>
-            <td>Next Arrival</td>
-            <td>Next Arrival</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-          <tr>
-            <td>Next Arrival</td>
-            <td>Next Arrival</td>
-            <td>Next Arrival</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
+        <tbody id="allTrains">
+            <!-- <tr>
+              <td>sad (min)</td>
+              <td>q12</td>
+              <td>12</td>
+              <td>12</td>
+              <td>12</td> -->
+            </tr>
         </tbody>
       </table>
     </div>
@@ -140,6 +112,31 @@
         trainName: document.querySelector('#trainName').value,
         destination: document.querySelector('#destination').value,
         frequency: document.querySelector('#frequency').value,
+      })
+    })
+
+    db.collection('schedules').onSnapshot(snap => {
+      // document.querySelector('#allTrains').innerHTML = ''
+      snap.docs.forEach(doc => {
+
+        // grab the important properties of the document
+        let { trainName, destination, frequency } = doc.data()
+
+        // Change the HTML to reflect
+        let trainElem = document.createElement('tr')
+
+        trainElem.innerHTML = `
+              <tr>
+                <td>sad (min)</td>
+                <td>q12</td>
+                <td>12</td>
+                <td>12</td>
+                <td>12</td>
+              </tr>
+        `
+        // add new card to the page
+        document.querySelector('#allTrains').append(trainElem)
+
       })
     })
 
