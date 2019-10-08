@@ -25,25 +25,46 @@
       <table class="striped">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Item Name</th>
-            <th>Item Price</th>
+            <th>Train Name</th>
+            <th>Destination</th>
+            <th>Frequency (min)</th>
+            <th>Next Arrival</th>
+            <th>Minutes Away</th>
           </tr>
         </thead>
-
         <tbody>
           <tr>
-            <td>Alvin</td>
+            <td>Destination</td>
             <td>Eclair</td>
+            <td>$0.87</td>
+            <td>$0.87</td>
             <td>$0.87</td>
           </tr>
           <tr>
-            <td>Alan</td>
+            <td>Frequesncy (min)</td>
             <td>Jellybean</td>
-            <td>$3.76</td>
+            <td>Jellybean</td>
+            <td>Jellybean</td>
+            <td>Jellybean</td>
           </tr>
           <tr>
-            <td>Jonathan</td>
+            <td>Next Arrival</td>
+            <td>Next Arrival</td>
+            <td>Next Arrival</td>
+            <td>Lollipop</td>
+            <td>$7.00</td>
+          </tr>
+          <tr>
+            <td>Next Arrival</td>
+            <td>Next Arrival</td>
+            <td>Next Arrival</td>
+            <td>Lollipop</td>
+            <td>$7.00</td>
+          </tr>
+          <tr>
+            <td>Next Arrival</td>
+            <td>Next Arrival</td>
+            <td>Next Arrival</td>
             <td>Lollipop</td>
             <td>$7.00</td>
           </tr>
@@ -57,27 +78,74 @@
     <form class="col s12" style="padding-top: 15px">
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="" id="first_name" type="text" class="validate">
+          <input placeholder="" id="trainName" type="text" class="validate">
           <label>Train Name</label>
         </div>
         <div class="input-field col s12">
-          <input placeholder="" id="first_name" type="text" class="validate">
+          <input placeholder="" id="destination" type="text" class="validate">
           <label>Destination</label>
         </div>
         <div class="input-field col s12">
-          <input placeholder="" id="first_name" type="text" class="validate">
-          <label>First Train Time (HH:mm - ilitry time)</label>
+          <input placeholder="" id="trainTime" type="text" class="validate">
+          <label>First Train Time (HH:mm - militry time)</label>
         </div>
         <div class="input-field col s12">
-          <input placeholder="" id="first_name" type="text" class="validate">
+          <input placeholder="" id="frequency" type="text" class="validate">
           <label> Frequency (min)</label>
         </div>
       </div>
     </form>
+    <a class="waves-effect waves-light btn" style="margin: 10px" id="submit">Submit</a>
   </div>
 
-</body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-firestore.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD273J2-H0__w6wKi-jPx1v41On0K4ronc",
+      authDomain: "traingame-583ed.firebaseapp.com",
+      databaseURL: "https://traingame-583ed.firebaseio.com",
+      projectId: "traingame-583ed",
+      storageBucket: "traingame-583ed.appspot.com",
+      messagingSenderId: "1001930301650",
+      appId: "1:1001930301650:web:15634d8ad9d1e0bae8cd0b"
+    }
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig)
+
+    const db = firebase.firestore()
+
+    // Initial Variables
+    let trainName,
+      destination,
+      frequency,
+      nextArrival,
+      minutesAway
+
+    // Capture Button Click
+    document.querySelector('#submit').addEventListener('click', e => {
+      // Don't refresh the page!
+      e.preventDefault()
+      console.log('pressed')
+
+      //Logic for storing and retrieving train schedule.
+      db.collection('schedules').doc(document.querySelector('#trainName').value).set({
+        trainName: document.querySelector('#trainName').value,
+        destination: document.querySelector('#destination').value,
+        frequency: document.querySelector('#frequency').value,
+      })
+    })
+
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
 
 </html>
